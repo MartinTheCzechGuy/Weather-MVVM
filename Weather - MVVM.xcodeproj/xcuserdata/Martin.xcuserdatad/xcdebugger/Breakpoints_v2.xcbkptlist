@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "8243AE2B-C02F-45A7-A796-ADFB8F395727"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B16CE182-24C8-4313-87FF-D5D01C196802"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather - MVVM/Coordinator/MainCoordinatorView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "onNavigation(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "332E2EE7-D79D-41C1-878B-755099F03A07"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather - MVVM/Coordinator/MainCoordinatorView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "onNavigation(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2029057D-EBCB-4C04-81BA-A9284AB33351"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather - MVVM/Coordinator/MainCoordinatorView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "navigation(item:destination:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2029057D-EBCB-4C04-81BA-A9284AB33351 - 4731f04d23c2cc88"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftUI.View.navigation&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_1: SwiftUI.View&gt;(item: SwiftUI.Binding&lt;Swift.Optional&lt;&#x3c4;_1_0&gt;&gt;, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some"
+                  moduleName = "Weather - MVVM"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Martin/Documents/Diplomka%20-%20zdrojaky/Weather%20-%20MVVM/Weather%20-%20MVVM/Coordinator/MainCoordinatorView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "1340">
+               </Location>
+               <Location
+                  uuid = "2029057D-EBCB-4C04-81BA-A9284AB33351 - f5df6c8c45402b68"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; Swift.Optional&lt;&#x3c4;_1_1&gt; in SwiftUI.View.navigation&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_1: SwiftUI.View&gt;(item: SwiftUI.Binding&lt;Swift.Optional&lt;&#x3c4;_1_0&gt;&gt;, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some"
+                  moduleName = "Weather - MVVM"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Martin/Documents/Diplomka%20-%20zdrojaky/Weather%20-%20MVVM/Weather%20-%20MVVM/Coordinator/MainCoordinatorView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "356">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
