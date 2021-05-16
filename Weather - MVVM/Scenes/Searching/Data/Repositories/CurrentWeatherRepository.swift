@@ -29,7 +29,6 @@ final class CurrentWeatherRepository: CurrentWeatherRepositoryType {
         }
         
         return URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
-            .print("aaaaaaaa")
             .map { $0.data }
             .mapError { error -> WeatherError in
                 if error.errorCode == 404 {
@@ -50,8 +49,21 @@ final class CurrentWeatherRepository: CurrentWeatherRepositoryType {
                     .eraseToAnyPublisher()
             }
             .map { dto in
-                CurrentWeather(
+                var weatherCode: WeatherCode
+                switch dto.weather.first!.id {
+                case 200..<300: weatherCode = .thunderstorm
+                case 300..<400: weatherCode = .drizzle
+                case 500..<600: weatherCode = .rain
+                case 600..<700: weatherCode = .snow
+                case 700..<800: weatherCode = .mist
+                case 801..<900: weatherCode = .clouds
+                default:
+                    weatherCode = .clear
+                }
+                
+                return CurrentWeather(
                     city: dto.name,
+                    weather: weatherCode,
                     description: dto.weather.first?.description ?? "No weather description.",
                     temperature: dto.main.temp,
                     pressure: dto.main.pressure,
@@ -85,6 +97,7 @@ private struct CurrentWeatherDTO: Decodable {
     let main: WeatherDataDTO
     
     struct WeatherDescriptionDTO: Decodable {
+        let id: Int
         let main: String
         let description: String
     }

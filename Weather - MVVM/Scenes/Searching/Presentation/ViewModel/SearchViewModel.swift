@@ -11,6 +11,7 @@ import Foundation
 final class SearchViewModel: SearchViewModelType {
     
     // Input
+    let navigationClick = PassthroughSubject<CurrentWeather, Never>()
     let hideErrorClick = PassthroughSubject<Void, Never>()
     
     // Output
@@ -24,17 +25,16 @@ final class SearchViewModel: SearchViewModelType {
     @Published var results: [CurrentWeather] = []
     @Published var showError = false
     
+    // Action
+    let navigateToDetail: AnyPublisher<CurrentWeather, Never>
+    
     // Private
     private let currentWeatherRepository: CurrentWeatherRepositoryType
-    private unowned let coordinator: MainCoordinator<SearchViewModel>
     private var bag = Set<AnyCancellable>()
 
-    init(
-        currentWeatherRepository: CurrentWeatherRepositoryType,
-        coordinator: MainCoordinator<SearchViewModel>
-    ) {
+    init(currentWeatherRepository: CurrentWeatherRepositoryType) {
         self.currentWeatherRepository = currentWeatherRepository
-        self.coordinator = coordinator
+        self.navigateToDetail = navigationClick.eraseToAnyPublisher()
         
         $city
             .compactMap { $0.count == .zero ? nil : $0 }
@@ -61,9 +61,5 @@ final class SearchViewModel: SearchViewModelType {
             .map { _ in false }
             .assign(to: \.showError, on: self)
             .store(in: &bag)
-    }
-    
-    func showDetail(for weather: CurrentWeather) {
-        coordinator.showDetail(for: weather)
     }
 }

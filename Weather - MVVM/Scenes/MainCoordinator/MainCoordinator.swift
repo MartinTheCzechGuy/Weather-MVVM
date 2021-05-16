@@ -5,27 +5,37 @@
 //  Created by Martin on 07.05.2021.
 //
 
-import Foundation
+import Combine
 
 class MainCoordinator<SearchVM>: ObservableObject where SearchVM: SearchViewModelType {
     
-    @Published var searchViewModel: SearchVM!
+    @Published var searchViewModel: SearchVM
     @Published var cityDetailViewModel: CityDetailViewModel?
     
+    private var bag = Set<AnyCancellable>()
+    
     init(apiKey: String) {
-        self.searchViewModel = SearchViewModel(
-            currentWeatherRepository: CurrentWeatherRepository(apiKey: apiKey),
-            coordinator: self as! MainCoordinator<SearchViewModel>
-        ) as? SearchVM
+        self.searchViewModel = (SearchViewModel(
+            currentWeatherRepository: CurrentWeatherRepository(apiKey: apiKey)
+        ) as? SearchVM)!
+        
+        setupBindings()
     }
     
-    func showDetail(for weather: CurrentWeather) {
-        self.cityDetailViewModel = .init(
-            city: weather.city,
-            weatherDescription: weather.description,
-            temperature: weather.temperature,
-            pressure: weather.pressure,
-            humidity: weather.humidity
-        )
+    private func setupBindings() {
+        searchViewModel.navigateToDetail
+            .sink(receiveValue: { [weak self] weather in
+                guard let self = self else { return }
+                
+                self.cityDetailViewModel = .init(
+                    city: weather.city,
+                    weatherCode: weather.weather,
+                    weatherDescription: weather.description,
+                    temperature: weather.temperature,
+                    pressure: weather.pressure,
+                    humidity: weather.humidity
+                )
+            })
+            .store(in: &bag)
     }
 }

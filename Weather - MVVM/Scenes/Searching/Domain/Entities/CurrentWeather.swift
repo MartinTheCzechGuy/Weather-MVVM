@@ -7,6 +7,7 @@
 
 struct CurrentWeather {
     let city: String
+    let weather: WeatherCode
     let description: String
     let temperature: Double
     let pressure: Double

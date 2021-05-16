@@ -13,14 +13,13 @@ struct MainCoordinatorView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                SearchView(viewModel: mainCoordinator.searchViewModel)
-                    .navigation(item: $mainCoordinator.cityDetailViewModel) { viewModel in
-                        CityDetailView(viewModel: viewModel)
-                    }
-                    .navigationTitle("Search")
-            }
+            SearchView(viewModel: mainCoordinator.searchViewModel)
+                .navigation(item: $mainCoordinator.cityDetailViewModel) { viewModel in
+                    CityDetailView(viewModel: viewModel)
+                }
+                .navigationTitle("Search")
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
