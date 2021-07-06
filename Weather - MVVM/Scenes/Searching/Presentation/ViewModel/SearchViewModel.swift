@@ -27,32 +27,43 @@ final class SearchViewModel: SearchViewModelType {
     
     // Action
     let navigateToDetail: AnyPublisher<CurrentWeather, Never>
+    let showLoading: AnyPublisher<Bool, Never>
     
     // Private
+    private let showLoadingSubject = PassthroughSubject<Bool, Never>()
     private let currentWeatherRepository: CurrentWeatherRepositoryType
     private var bag = Set<AnyCancellable>()
 
     init(currentWeatherRepository: CurrentWeatherRepositoryType) {
         self.currentWeatherRepository = currentWeatherRepository
         self.navigateToDetail = navigationClick.eraseToAnyPublisher()
+        self.showLoading = showLoadingSubject.eraseToAnyPublisher()
         
         $city
             .compactMap { $0.count == .zero ? nil : $0 }
             .debounce(for: .milliseconds(500), scheduler: DispatchQueue.global(qos: .background))
-            .flatMap(currentWeatherRepository.currentWeather(for:))
+            .flatMap { [weak self] city -> AnyPublisher<Result<CurrentWeather, WeatherError>, Never> in
+                guard let self = self else {
+                    return Just<Result<CurrentWeather, WeatherError>>(.failure(.unknownError)).eraseToAnyPublisher()
+                }
+                
+                self.showLoadingSubject.send(true)
+
+                return self.currentWeatherRepository.currentWeather(for: city) }
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: {_ in },
                 receiveValue: { [weak self] result in
                     guard let self = self else { return }
                     
+                    self.showLoadingSubject.send(false)
+                                        
                     switch result {
                     case .success(let currentWeater):
                         self.results = [currentWeater]
                     case .failure(_):
                         self.showError = true
                     }
-                    
                 }
             )
             .store(in: &bag)
@@ -60,6 +71,6 @@ final class SearchViewModel: SearchViewModelType {
         hideErrorClick
             .map { _ in false }
             .assign(to: \.showError, on: self)
-            .store(in: &bag)
+            .store(in: &bag)        
     }
 }

@@ -20,4 +20,5 @@ protocol SearchViewModelType: ObservableObject {
     
     // Action - communication from view model to coordinator
     var navigateToDetail: AnyPublisher<CurrentWeather, Never> { get }
+    var showLoading: AnyPublisher<Bool, Never> { get }
 }

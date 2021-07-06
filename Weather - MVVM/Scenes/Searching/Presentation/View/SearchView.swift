@@ -29,7 +29,6 @@ struct SearchView<ViewModel>: View where ViewModel: SearchViewModelType {
                 )
             )
             .cornerRadius(20)
-            .shadow(color: .gray, radius: 10)
             
             if (!viewModel.results.isEmpty) {
                 HStack {

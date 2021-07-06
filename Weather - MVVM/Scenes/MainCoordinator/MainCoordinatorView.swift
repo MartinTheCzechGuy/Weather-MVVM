@@ -12,14 +12,18 @@ struct MainCoordinatorView: View {
     @ObservedObject var mainCoordinator: MainCoordinator<SearchViewModel>
     
     var body: some View {
-        NavigationView {
-            SearchView(viewModel: mainCoordinator.searchViewModel)
-                .navigation(item: $mainCoordinator.cityDetailViewModel) { viewModel in
-                    CityDetailView(viewModel: viewModel)
-                }
-                .navigationTitle("Search")
+        if mainCoordinator.showLoading {
+            ProgressView("Loading data ...")
+        } else {
+            NavigationView {
+                SearchView(viewModel: mainCoordinator.searchViewModel)
+                    .navigation(item: $mainCoordinator.cityDetailViewModel) { viewModel in
+                        CityDetailView(viewModel: viewModel)
+                    }
+                    .navigationTitle("Search")
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

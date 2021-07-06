@@ -6,10 +6,12 @@
 //
 
 import Combine
+import Foundation
 
 class MainCoordinator<SearchVM>: ObservableObject where SearchVM: SearchViewModelType {
     
     @Published var searchViewModel: SearchVM
+    @Published var showLoading: Bool = false
     @Published var cityDetailViewModel: CityDetailViewModel?
     
     private var bag = Set<AnyCancellable>()
@@ -36,6 +38,11 @@ class MainCoordinator<SearchVM>: ObservableObject where SearchVM: SearchViewMode
                     humidity: weather.humidity
                 )
             })
+            .store(in: &bag)
+        
+        searchViewModel.showLoading
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.showLoading, on: self)
             .store(in: &bag)
     }
 }
