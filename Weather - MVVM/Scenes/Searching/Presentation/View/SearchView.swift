@@ -42,6 +42,12 @@ struct SearchView<ViewModel>: View where ViewModel: SearchViewModelType {
             List(viewModel.results, id: \.self) { weather in
                 Text(weather.city)
                     .onNavigation { viewModel.navigationClick.send(weather) }
+                    .padding()
+                    .padding(.horizontal)
+                    .border(
+                        Color(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, opacity: 1)
+                    )
+
             }
             .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
         }
@@ -51,6 +57,11 @@ struct SearchView<ViewModel>: View where ViewModel: SearchViewModelType {
                 title: Text("The city name \(viewModel.city) not found. Please try a different search."),
                 dismissButton: .default(Text("OK"))
             )
+        }
+        .onAppear {
+            UITableView.appearance().separatorStyle = .none
+            UITableViewCell.appearance().backgroundColor = .clear
+            UITableView.appearance().backgroundColor = .clear
         }
     }
 }
