@@ -9,7 +9,11 @@ import SwiftUI
 
 struct MainCoordinatorView: View {
     
-    @ObservedObject var mainCoordinator: MainCoordinator<SearchViewModel>
+    @ObservedObject private var mainCoordinator: MainCoordinator<SearchViewModel>
+    
+    init(mainCoordinator: MainCoordinator<SearchViewModel>) {
+        self.mainCoordinator = mainCoordinator
+    }
     
     var body: some View {
         if mainCoordinator.showLoading {

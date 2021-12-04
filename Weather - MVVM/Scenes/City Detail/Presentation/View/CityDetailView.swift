@@ -9,7 +9,11 @@ import SwiftUI
 
 struct CityDetailView: View {
     
-    @ObservedObject var viewModel: CityDetailViewModel
+    @ObservedObject private var viewModel: CityDetailViewModel
+    
+    init(viewModel: CityDetailViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         ZStack {
@@ -23,7 +27,7 @@ struct CityDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150)
-                                
+                
                 VStack {
                     Text(viewModel.weatherDescription)
                     Text("🌡 Temperature - \(String(format: "%.1f", viewModel.temperature)) ℃")

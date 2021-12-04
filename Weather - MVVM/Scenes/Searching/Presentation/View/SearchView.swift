@@ -9,7 +9,11 @@ import SwiftUI
 
 struct SearchView<ViewModel>: View where ViewModel: SearchViewModelType {
     
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject private var viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack {
